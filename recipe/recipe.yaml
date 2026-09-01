@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: odachi
-  version: "1.0.1"
+  version: 1.0.1
 
 package:
   name: ${{ name|lower }}
@@ -15,12 +15,12 @@ source:
 build:
   number: 2
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - pip
-    - python ${{ python_min }}
+    - python ${{ python_min }}.*
     - setuptools
   run:
     - numpy
@@ -42,8 +42,7 @@ tests:
 about:
   summary: Advanced deep learning-based organic retrosynthesis engine
   license: MIT
-  license_file:
-    - LICENSE.txt
+  license_file: LICENSE.txt
   homepage: https://github.com/sudo-rushil/odachi
 
 extra:
