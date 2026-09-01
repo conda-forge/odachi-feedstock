@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: odachi
+  version: "1.0.1"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/odachi-${{ version }}.tar.gz
+  sha256: 937f35e085ddb54f49fd38dde872d28b1e65de3b35d15d8c38396d63c6ff4038
+
+build:
+  number: 2
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}
+    - setuptools
+  run:
+    - numpy
+    - pandas
+    - python >=${{ python_min }}
+    - scikit-learn
+    - tensorflow
+    - rdkit
+
+tests:
+  - python:
+      imports:
+        - odachi
+      pip_check: true
+      python_version:
+        - ${{ python_min }}
+        - "*"
+
+about:
+  summary: Advanced deep learning-based organic retrosynthesis engine
+  license: MIT
+  license_file:
+    - LICENSE.txt
+  homepage: https://github.com/sudo-rushil/odachi
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
